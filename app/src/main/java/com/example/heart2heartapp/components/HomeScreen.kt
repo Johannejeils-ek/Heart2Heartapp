@@ -8,13 +8,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavController
 import com.example.heart2heartapp.classes.EventViewModel
 
 @Composable
-fun HomeScreen(name: String, onArgumentsButtonClick: () -> Unit) {
-    val eventViewModel = viewModel<EventViewModel>();
-    val navController = rememberNavController()
+fun HomeScreen(name: String, navController: NavController, onArgumentsButtonClick: () -> Unit) {
+    val eventViewModel = viewModel<EventViewModel>()
     Column {
         LazyColumn() {
             items(eventViewModel.events) { event ->
@@ -26,11 +25,5 @@ fun HomeScreen(name: String, onArgumentsButtonClick: () -> Unit) {
                 }
             }
         }
-        /*
-        HomeScreen({
-            navController.navigate("screen-2")
-        })
-
-         */
     }
 }

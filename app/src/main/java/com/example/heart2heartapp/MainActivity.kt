@@ -1,4 +1,5 @@
 package com.example.heart2heartapp
+
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -58,12 +59,15 @@ class MainActivity : ComponentActivity() {
 
                     composable("home-screen") {
                         HomeScreen(
-                            name = "HomeID", onArgumentsButtonClick = {
+                            name = "HomeID",
+                            navController = navController,
+                            onArgumentsButtonClick = {
                                 val stringToSend = "Clicked from home"
                                 val eventId = "3"
                                 // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}")
-                                navController.navigate("eventBuilder/${eventId}")
+                                navController.navigate("eventBuilder/${eventId}") {
+                                    launchSingleTop = true
+                                }
                             })
                     }
 
@@ -72,7 +76,10 @@ class MainActivity : ComponentActivity() {
                             name = "HeartID", onArgumentsButtonClick = {
                                 val stringToSend = "Clicked from heart"
                                 // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}")
+                                navController.navigate("sendArgumentsHere/${stringToSend}"){
+                                    launchSingleTop = true
+                                }
+
                             })
                     }
 
@@ -81,9 +88,16 @@ class MainActivity : ComponentActivity() {
                             name = "ChatID", onArgumentsButtonClick = {
                                 val stringToSend = "Clicked from chat"
                                 // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}")
+                                navController.navigate("sendArgumentsHere/${stringToSend}"){
+                                    launchSingleTop = true
+                                }
+
                             })
                     }
+
+                    /*
+                    testing
+
                     composable(
                         "sendArgumentsHere/{name}",
                         arguments = listOf(navArgument("name") { type = NavType.StringType })
@@ -108,6 +122,10 @@ class MainActivity : ComponentActivity() {
 
 
                     }
+
+
+
+                     */
                 }
             }
         }
