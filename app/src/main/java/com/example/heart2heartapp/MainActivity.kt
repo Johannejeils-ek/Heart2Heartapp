@@ -5,14 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.benchmark.traceprocessor.Row
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.People
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Place
@@ -69,11 +74,6 @@ class MainActivity : ComponentActivity() {
                                 currentScreen = "3"
                                 navController.navigate("screen-3")
 
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
-
                             }
                         )
                     }
@@ -94,11 +94,6 @@ class MainActivity : ComponentActivity() {
                             onScreen3ButtonClick = {
                                 currentScreen = "3"
                                 navController.navigate("screen-3")
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
 
                             }
                         )
@@ -121,41 +116,9 @@ class MainActivity : ComponentActivity() {
                                 currentScreen = "3"
                                 navController.navigate("screen-3") {launchSingleTop = true}
 
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
-
                             }
                         )
                     }
-                    composable("screen-4") {
-                        Screen4(
-                            "benjamin",
-                            currentScreen = currentScreen,
-                            onScreen1ButtonClick = {
-                                currentScreen = "home-screen"
-                                navController.navigate("home-screen") {launchSingleTop = true}
-
-                            },
-                            onScreen2ButtonClick = {
-                                currentScreen = "2"
-                                navController.navigate("screen-2")
-
-                            },
-                            onScreen3ButtonClick = {
-                                currentScreen = "3"
-                                navController.navigate("screen-3")
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4") {launchSingleTop = true}
-
-                            }
-                        )
-                    }
-
                 }
             }
         }
@@ -168,11 +131,12 @@ fun HomeScreen(
     currentScreen: String,
     onScreen2ButtonClick: () -> Unit,
     onScreen3ButtonClick: () -> Unit,
-    onScreen4ButtonClick: () -> Unit,
     onScreen1ButtonClick: () -> Unit
 ) {
     Column (modifier = Modifier
-        .fillMaxSize())
+        .fillMaxSize()
+        .padding(horizontal = 16.dp, vertical = 15.dp))
+
     {
         Column(modifier = Modifier
             .weight(1f)){
@@ -185,8 +149,18 @@ fun HomeScreen(
             )
 
         }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
+        Row ( modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                color = Color.White,
+                RoundedCornerShape(50.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = Color(0xFFE0E0E0),
+                shape = RoundedCornerShape(50.dp)
+            ),
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Bottom){
 
             val pink = Color(0xFFE91E8C)
@@ -194,37 +168,28 @@ fun HomeScreen(
 
             IconButton(onClick = onScreen1ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Favorite,
+                    imageVector = Icons.Outlined.Home,
                     contentDescription = "Home",
                     tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen2ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Place,
+                    imageVector = Icons.Outlined.Favorite,
                     contentDescription = "Map",
                     tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen3ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.People,
+                    imageVector = Icons.Outlined.Person,
                     contentDescription = "Community",
                     tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
         }
@@ -237,7 +202,6 @@ fun Screen2( name: String,
              currentScreen: String,
              onScreen2ButtonClick: () -> Unit,
              onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
              onScreen1ButtonClick: () -> Unit
 ) {
     Column (modifier = Modifier
@@ -253,8 +217,8 @@ fun Screen2( name: String,
                 text = "Hello $name!"
             )
         }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
+        Row (modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Bottom){
 
             val pink = Color(0xFFE91E8C)
@@ -262,37 +226,28 @@ fun Screen2( name: String,
 
             IconButton(onClick = onScreen1ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Favorite,
+                    imageVector = Icons.Outlined.Home,
                     contentDescription = "Home",
                     tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen2ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Place,
+                    imageVector = Icons.Outlined.Favorite,
                     contentDescription = "Map",
                     tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen3ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.People,
+                    imageVector = Icons.Outlined.Person,
                     contentDescription = "Community",
                     tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
         }
@@ -305,7 +260,6 @@ fun Screen3( name: String,
              currentScreen: String,
              onScreen2ButtonClick: () -> Unit,
              onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
              onScreen1ButtonClick: () -> Unit
 ) {
     Column (modifier = Modifier
@@ -321,8 +275,8 @@ fun Screen3( name: String,
                 text = "Hello $name!"
             )
         }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
+        Row (modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.Bottom){
 
             val pink = Color(0xFFE91E8C)
@@ -330,105 +284,28 @@ fun Screen3( name: String,
 
             IconButton(onClick = onScreen1ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Favorite,
+                    imageVector = Icons.Outlined.Home,
                     contentDescription = "Home",
                     tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen2ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.Place,
-                    contentDescription = "Map",
-                    tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen3ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.People,
-                    contentDescription = "Community",
-                    tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Screen4( name: String,
-             currentScreen: String,
-             onScreen2ButtonClick: () -> Unit,
-             onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
-             onScreen1ButtonClick: () -> Unit
-) {
-    Column (modifier = Modifier
-        .fillMaxSize())
-    {
-        Column(modifier = Modifier
-            .weight(1f)){
-            Text(
-                text = "Screen 4",
-                fontSize = 32.sp
-            )
-            Text(
-                text = "Hello $name!"
-            )
-        }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
-
-            val pink = Color(0xFFE91E8C)
-            val grey = Color(0xFF9E9E9E)
-
-            IconButton(onClick = onScreen1ButtonClick) {
-                Icon(
                     imageVector = Icons.Outlined.Favorite,
-                    contentDescription = "Home",
-                    tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen2ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Place,
                     contentDescription = "Map",
                     tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
 
             IconButton(onClick = onScreen3ButtonClick) {
                 Icon(
-                    imageVector = Icons.Outlined.People,
+                    imageVector = Icons.Outlined.Person,
                     contentDescription = "Community",
                     tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(50.dp)
                 )
             }
         }
