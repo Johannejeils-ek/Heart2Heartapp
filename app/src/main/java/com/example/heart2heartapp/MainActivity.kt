@@ -1,161 +1,113 @@
 package com.example.heart2heartapp
-
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.benchmark.traceprocessor.Row
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.People
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Place
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.heart2heartapp.ui.theme.Heart2HeartAppTheme
+import androidx.navigation.navArgument
+import com.example.heart2heartapp.classes.EventViewModel
+import com.example.heart2heartapp.components.ChatScreen
+import com.example.heart2heartapp.components.HeartScreen
+import com.example.heart2heartapp.components.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val eventViewModel = viewModel<EventViewModel>();
             val navController = rememberNavController()
-            var currentScreen by remember { mutableStateOf("home-screen") }
+            Scaffold(
+                bottomBar = { BottomNavBar(navController) }) { innerPadding ->
+                NavHost(
+                    navController = navController,
+                    startDestination = "home-screen",
+                    modifier = Modifier.padding(innerPadding)
+                ) {
 
-            Column {
-                Text(
-                    text = "Heart2Heart",
-                    fontSize = 45.sp
-                )
-
-                NavHost(navController = navController, startDestination = "home-screen") {
                     composable("home-screen") {
                         HomeScreen(
-                            "benjamin",
-                            currentScreen = currentScreen,
-                            onScreen1ButtonClick = {
-                                currentScreen = "home-screen"
-                                navController.navigate("home-screen"){launchSingleTop = true}
-
-                            },
-                            onScreen2ButtonClick = {
-                                currentScreen = "2"
-                                navController.navigate("screen-2")
-
-                            },
-                            onScreen3ButtonClick = {
-                                currentScreen = "3"
-                                navController.navigate("screen-3")
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
-
-                            }
-                        )
-                    }
-                    composable("screen-2") {
-                        Screen2(
-                            "benjamin",
-                            currentScreen = currentScreen,
-                            onScreen1ButtonClick = {
-                                currentScreen = "home-screen"
-                                navController.navigate("home-screen") {launchSingleTop = true}
-
-                            },
-                            onScreen2ButtonClick = {
-                                currentScreen = "2"
-                                navController.navigate("screen-2") {launchSingleTop = true}
-
-                            },
-                            onScreen3ButtonClick = {
-                                currentScreen = "3"
-                                navController.navigate("screen-3")
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
-
-                            }
-                        )
-                    }
-                    composable("screen-3") {
-                        Screen3(
-                            "benjamin",
-                            currentScreen = currentScreen,
-                            onScreen1ButtonClick = {
-                                currentScreen = "home-screen"
-                                navController.navigate("home-screen") {launchSingleTop = true}
-
-                            },
-                            onScreen2ButtonClick = {
-                                currentScreen = "2"
-                                navController.navigate("screen-2")
-
-                            },
-                            onScreen3ButtonClick = {
-                                currentScreen = "3"
-                                navController.navigate("screen-3") {launchSingleTop = true}
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4")
-
-                            }
-                        )
-                    }
-                    composable("screen-4") {
-                        Screen4(
-                            "benjamin",
-                            currentScreen = currentScreen,
-                            onScreen1ButtonClick = {
-                                currentScreen = "home-screen"
-                                navController.navigate("home-screen") {launchSingleTop = true}
-
-                            },
-                            onScreen2ButtonClick = {
-                                currentScreen = "2"
-                                navController.navigate("screen-2")
-
-                            },
-                            onScreen3ButtonClick = {
-                                currentScreen = "3"
-                                navController.navigate("screen-3")
-
-                            },
-                            onScreen4ButtonClick = {
-                                currentScreen = "4"
-                                navController.navigate("screen-4") {launchSingleTop = true}
-
-                            }
-                        )
+                            name = "HomeID", onArgumentsButtonClick = {
+                                val stringToSend = "Clicked from home"
+                                val eventId = "3"
+                                // this is how the "url" will look: sendArgumentsHere/Benjamin
+                                navController.navigate("sendArgumentsHere/${stringToSend}")
+                                navController.navigate("eventBuilder/${eventId}")
+                            })
                     }
 
+                    composable("heart-screen") {
+                        HeartScreen(
+                            name = "HeartID", onArgumentsButtonClick = {
+                                val stringToSend = "Clicked from heart"
+                                // this is how the "url" will look: sendArgumentsHere/Benjamin
+                                navController.navigate("sendArgumentsHere/${stringToSend}")
+                            })
+                    }
+
+                    composable("chat-screen") {
+                        ChatScreen(
+                            name = "ChatID", onArgumentsButtonClick = {
+                                val stringToSend = "Clicked from chat"
+                                // this is how the "url" will look: sendArgumentsHere/Benjamin
+                                navController.navigate("sendArgumentsHere/${stringToSend}")
+                            })
+                    }
+                    composable(
+                        "sendArgumentsHere/{name}",
+                        arguments = listOf(navArgument("name") { type = NavType.StringType })
+                    ) { backStackEntry ->
+                        val name = backStackEntry.arguments?.getString("name") ?: return@composable
+                        SendArgumentsHere(name)
+                    }
+                    composable(
+                        "eventBuilder/{id}",
+                        arguments = listOf(navArgument("id") { type = NavType.StringType })
+                    ) { backStackEntry ->
+                        val id = backStackEntry.arguments?.getString("id") ?: return@composable
+                        EventBuilder(id)
+                    }
+                    composable("event-page/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })) { backStackEntry ->
+                        val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+//                        val foundEvent = EventViewModel.getEvent(id)
+//                        if(foundEvent!= null) {
+//                            Text(text = "Event name: ${foundEvent.name}. Id: ${foundEvent.id}")
+//                        }
+
+
+
+                    }
                 }
             }
         }
@@ -163,274 +115,87 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(
-    name: String,
-    currentScreen: String,
-    onScreen2ButtonClick: () -> Unit,
-    onScreen3ButtonClick: () -> Unit,
-    onScreen4ButtonClick: () -> Unit,
-    onScreen1ButtonClick: () -> Unit
-) {
-    Column (modifier = Modifier
-        .fillMaxSize())
-    {
-        Column(modifier = Modifier
-            .weight(1f)){
-            Text(
-                text = "Screen 1",
-                fontSize = 32.sp
-            )
-            Text(
-                text = "Hello $name!"
-            )
-
-        }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
-
-            val pink = Color(0xFFE91E8C)
-            val grey = Color(0xFF9E9E9E)
-
-            IconButton(onClick = onScreen1ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Favorite,
-                    contentDescription = "Home",
-                    tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen2ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Place,
-                    contentDescription = "Map",
-                    tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen3ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.People,
-                    contentDescription = "Community",
-                    tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
-    }
+fun SendArgumentsHere(name: String) {
+    Text(text = "send argument Argument: $name")
+}
+@Composable
+fun EventBuilder(id: String) {
+    Text(text = "Event builder - Argument: $id")
 }
 
-
+// NAVBAR-------------------------------------------------
 @Composable
-fun Screen2( name: String,
-             currentScreen: String,
-             onScreen2ButtonClick: () -> Unit,
-             onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
-             onScreen1ButtonClick: () -> Unit
-) {
-    Column (modifier = Modifier
-        .fillMaxSize())
-    {
-        Column(modifier = Modifier
-            .weight(1f)){
-            Text(
-                text = "Screen 2",
-                fontSize = 32.sp
-            )
-            Text(
-                text = "Hello $name!"
-            )
-        }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
+fun BottomNavBar(navController: NavController) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
 
-            val pink = Color(0xFFE91E8C)
-            val grey = Color(0xFF9E9E9E)
+    val pink = Color(0xFFE91E8C)
+    val grey = Color(0xFF9E9E9E)
 
-            IconButton(onClick = onScreen1ButtonClick) {
+    NavigationBar(
+        containerColor = Color.Transparent,
+        tonalElevation = 0.dp,
+        modifier = Modifier
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(50.dp)
+            )
+            .border(
+                width = 1.dp,
+                color = Color(0xFFE0E0E0),
+                shape = RoundedCornerShape(50.dp)
+            )
+    ) {
+// HOME
+        NavigationBarItem(
+            selected = currentRoute == "home-screen",
+            onClick = {
+                navController.navigate("home-screen") { launchSingleTop = true }
+            },
+            icon = {
+                Icon(
+                    imageVector = Icons.Outlined.Home,
+                    contentDescription = "Home",
+                    tint = if (currentRoute == "home-screen") pink else grey,
+                    modifier = Modifier.size(32.dp)
+                )
+            },
+            label = null
+        )
+
+        // HEART
+        NavigationBarItem(
+            selected = currentRoute == "heart-screen",
+            onClick = {
+                navController.navigate("heart-screen") { launchSingleTop = true }
+            },
+            icon = {
                 Icon(
                     imageVector = Icons.Outlined.Favorite,
-                    contentDescription = "Home",
-                    tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    contentDescription = "Heart",
+                    tint = if (currentRoute == "heart-screen") pink else grey,
+                    modifier = Modifier.size(32.dp)
                 )
-            }
+            },
+            label = null
+        )
 
-            IconButton(onClick = onScreen2ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Place,
-                    contentDescription = "Map",
-                    tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen3ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.People,
-                    contentDescription = "Community",
-                    tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
+        // CHAT
+        NavigationBarItem(
+            selected = currentRoute == "chat-screen",
+            onClick = {
+                navController.navigate("chat-screen") { launchSingleTop = true }
+            },
+            icon = {
                 Icon(
                     imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
+                    contentDescription = "Chat",
+                    tint = if (currentRoute == "chat-screen") pink else grey,
+                    modifier = Modifier.size(32.dp)
                 )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Screen3( name: String,
-             currentScreen: String,
-             onScreen2ButtonClick: () -> Unit,
-             onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
-             onScreen1ButtonClick: () -> Unit
-) {
-    Column (modifier = Modifier
-        .fillMaxSize())
-    {
-        Column(modifier = Modifier
-            .weight(1f)){
-            Text(
-                text = "Screen 3",
-                fontSize = 32.sp
-            )
-            Text(
-                text = "Hello $name!"
-            )
-        }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
-
-            val pink = Color(0xFFE91E8C)
-            val grey = Color(0xFF9E9E9E)
-
-            IconButton(onClick = onScreen1ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Favorite,
-                    contentDescription = "Home",
-                    tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen2ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Place,
-                    contentDescription = "Map",
-                    tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen3ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.People,
-                    contentDescription = "Community",
-                    tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun Screen4( name: String,
-             currentScreen: String,
-             onScreen2ButtonClick: () -> Unit,
-             onScreen3ButtonClick: () -> Unit,
-             onScreen4ButtonClick: () -> Unit,
-             onScreen1ButtonClick: () -> Unit
-) {
-    Column (modifier = Modifier
-        .fillMaxSize())
-    {
-        Column(modifier = Modifier
-            .weight(1f)){
-            Text(
-                text = "Screen 4",
-                fontSize = 32.sp
-            )
-            Text(
-                text = "Hello $name!"
-            )
-        }
-        Row (modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
-
-            val pink = Color(0xFFE91E8C)
-            val grey = Color(0xFF9E9E9E)
-
-            IconButton(onClick = onScreen1ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Favorite,
-                    contentDescription = "Home",
-                    tint = if (currentScreen == "home-screen") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen2ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Place,
-                    contentDescription = "Map",
-                    tint = if (currentScreen == "2") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen3ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.People,
-                    contentDescription = "Community",
-                    tint = if (currentScreen == "3") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-
-            IconButton(onClick = onScreen4ButtonClick) {
-                Icon(
-                    imageVector = Icons.Outlined.Person,
-                    contentDescription = "Profil",
-                    tint = if (currentScreen == "4") pink else grey,
-                    modifier = Modifier.size(24.dp)
-                )
-            }
-        }
+            },
+            label = null
+        )
     }
 }
