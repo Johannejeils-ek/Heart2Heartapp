@@ -2,6 +2,7 @@ package com.example.heart2heartapp.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,6 +32,7 @@ fun BottomNavBar(navController: NavController) {
     NavigationBar(
         containerColor = Color.Transparent,
         tonalElevation = 0.dp,
+        windowInsets = WindowInsets(0.dp),
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 12.dp)
             .background(
