@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+copilot.data.migration.ask2agent.xml
