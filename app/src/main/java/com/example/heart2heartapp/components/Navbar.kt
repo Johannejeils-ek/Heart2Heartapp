@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Chat
+import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -86,7 +88,7 @@ fun BottomNavBar(navController: NavController) {
             },
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.Person,
+                    imageVector = Icons.AutoMirrored.Outlined.Chat,
                     contentDescription = "Chat",
                     tint = if (currentRoute == "chat-screen") pink else grey,
                     modifier = Modifier.size(32.dp)
