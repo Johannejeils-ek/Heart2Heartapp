@@ -2,10 +2,13 @@ package com.example.heart2heartapp.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Chat
+import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
@@ -31,6 +34,7 @@ fun BottomNavBar(navController: NavController) {
     NavigationBar(
         containerColor = Color.Transparent,
         tonalElevation = 0.dp,
+        windowInsets = WindowInsets(0.dp),
         modifier = Modifier
             .padding(horizontal = 16.dp, vertical = 12.dp)
             .background(
@@ -43,7 +47,7 @@ fun BottomNavBar(navController: NavController) {
                 shape = RoundedCornerShape(50.dp)
             )
     ) {
-// HOME
+        // ========================= HOME ==============================
         NavigationBarItem(
             selected = currentRoute == "home-screen",
             onClick = {
@@ -59,8 +63,7 @@ fun BottomNavBar(navController: NavController) {
             },
             label = null
         )
-
-        // HEART
+        // ===================== HEART =============================
         NavigationBarItem(
             selected = currentRoute == "heart-screen",
             onClick = {
@@ -77,7 +80,7 @@ fun BottomNavBar(navController: NavController) {
             label = null
         )
 
-        // CHAT
+        // ======================= CHAT ==============================
         NavigationBarItem(
             selected = currentRoute == "chat-screen",
             onClick = {
@@ -85,7 +88,7 @@ fun BottomNavBar(navController: NavController) {
             },
             icon = {
                 Icon(
-                    imageVector = Icons.Outlined.Person,
+                    imageVector = Icons.AutoMirrored.Outlined.Chat,
                     contentDescription = "Chat",
                     tint = if (currentRoute == "chat-screen") pink else grey,
                     modifier = Modifier.size(32.dp)
