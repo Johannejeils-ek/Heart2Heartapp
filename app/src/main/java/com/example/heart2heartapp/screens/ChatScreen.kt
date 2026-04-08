@@ -1,4 +1,4 @@
-package com.example.heart2heartapp.components
+package com.example.heart2heartapp.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -7,14 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun HeartScreen(name: String, onArgumentsButtonClick: () -> Unit) {
+fun ChatScreen(name: String, onArgumentsButtonClick: () -> Unit) {
     Column {
         Text(
-            text = "Heart screen",
+            text = "Chat screen",
             fontSize = 32.sp
         )
         Text(
-            text = "Hello $name!"
+            text = "Welcome to chat!"
         )
         Button(onClick = onArgumentsButtonClick) {
             Text("Send argument")

@@ -32,9 +32,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.heart2heartapp.classes.EventViewModel
-import com.example.heart2heartapp.components.ChatScreen
-import com.example.heart2heartapp.components.HeartScreen
-import com.example.heart2heartapp.components.HomeScreen
+import com.example.heart2heartapp.screens.ChatScreen
+import com.example.heart2heartapp.screens.HeartScreen
+import com.example.heart2heartapp.screens.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
