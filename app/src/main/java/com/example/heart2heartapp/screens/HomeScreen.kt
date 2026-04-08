@@ -17,23 +17,20 @@ import androidx.navigation.NavController
 import com.example.heart2heartapp.classes.EventViewModel
 
 @Composable
-fun HomeScreen(name: String, navController: NavController, onArgumentsButtonClick: () -> Unit) {
+fun HomeScreen(name: String,
+    onEventClick: (Int) -> Unit
+) {
     val eventViewModel = viewModel<EventViewModel>()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFFFFFFF))
-            .padding(
-                top = 40.dp,
-            ),
-    ){
+            .background(Color(0xFFFFFFFF)),
+    ) {
         LazyColumn() {
             items(eventViewModel.events) { event ->
                 Text(event.name)
-                Button(onClick = {
-                    navController.navigate("event-page/${event.id}")
-                }) {
+                Button(onClick = { onEventClick(event.id) }) {
                     Text("Se Event")
                 }
             }
