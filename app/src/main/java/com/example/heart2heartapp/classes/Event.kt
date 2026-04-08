@@ -5,6 +5,6 @@ class Event(
     val id: Int,
     //val image: String
 ) {
-    //TODO event skal buildes ud fra et ID, så når man trykker på event 1 bliver billede, description, deltagere osv. renderet ud fra IDet
+    //TODO image til både viewmodel og event page //// måske lav en screen til event, for low fid and high cohe
 
 }

@@ -89,7 +89,6 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate("sendArgumentsHere/${stringToSend}") {
                                     launchSingleTop = true
                                 }
-
                             })
                     }
 
