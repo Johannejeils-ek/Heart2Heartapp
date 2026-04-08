@@ -1,5 +1,6 @@
 package com.example.heart2heartapp.screens
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +20,7 @@ fun HeartScreen(name: String, onArgumentsButtonClick: () -> Unit) {
     Column (
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFFFFFFF))
             .padding(
                 top = 40.dp,
             ),
