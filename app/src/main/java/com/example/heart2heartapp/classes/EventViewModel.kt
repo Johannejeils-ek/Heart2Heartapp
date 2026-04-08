@@ -17,4 +17,6 @@ class EventViewModel: ViewModel() {
 
         return events.find { event -> event.id == id }
     }
+
+
 }

@@ -72,7 +72,6 @@ class MainActivity : ComponentActivity() {
                                         Text(text = "Event name: ${foundEvent.name}. Id: ${foundEvent.id}")
                                     }
                                 }
-
                             })
                     }
 
