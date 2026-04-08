@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity() {
             val eventViewModel = viewModel<EventViewModel>();
             val navController = rememberNavController()
             Scaffold(
+                containerColor = Color(0xFFFFFFFF),
                 bottomBar = { BottomNavBar(navController) }) { innerPadding ->
                 NavHost(
                     navController = navController,
