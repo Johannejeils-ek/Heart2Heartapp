@@ -17,7 +17,7 @@ fun HeartScreen(name: String, onArgumentsButtonClick: () -> Unit) {
             text = "Hello $name!"
         )
         Button(onClick = onArgumentsButtonClick) {
-            Text("Send argument")
+            Text("Not yet working")
         }
     }
 }
