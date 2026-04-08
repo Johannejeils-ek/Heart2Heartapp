@@ -43,7 +43,7 @@ fun BottomNavBar(navController: NavController) {
                 shape = RoundedCornerShape(50.dp)
             )
     ) {
-// HOME
+        // ========================= HOME ==============================
         NavigationBarItem(
             selected = currentRoute == "home-screen",
             onClick = {
@@ -59,8 +59,7 @@ fun BottomNavBar(navController: NavController) {
             },
             label = null
         )
-
-        // HEART
+        // ===================== HEART =============================
         NavigationBarItem(
             selected = currentRoute == "heart-screen",
             onClick = {
@@ -77,7 +76,7 @@ fun BottomNavBar(navController: NavController) {
             label = null
         )
 
-        // CHAT
+        // ======================= CHAT ==============================
         NavigationBarItem(
             selected = currentRoute == "chat-screen",
             onClick = {
