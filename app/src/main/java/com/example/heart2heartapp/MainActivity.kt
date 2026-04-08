@@ -27,10 +27,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.heart2heartapp.classes.EventViewModel
 import com.example.heart2heartapp.components.BottomNavBar
 import com.example.heart2heartapp.screens.ChatScreen
@@ -63,12 +65,14 @@ class MainActivity : ComponentActivity() {
                             name = "HomeID",
                             navController = navController,
                             onArgumentsButtonClick = {
-                                val stringToSend = "Clicked from home"
-                                val eventId = "3"
-                                // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("eventBuilder/${eventId}") {
-                                    launchSingleTop = true
+                                composable("event-bubble/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })) { backStackEntry ->
+                                    val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+                                    val foundEvent = eventViewModel.getEvent(id)
+                                    if(foundEvent!= null) {
+                                        Text(text = "Event name: ${foundEvent.name}. Id: ${foundEvent.id}")
+                                    }
                                 }
+
                             })
                     }
 

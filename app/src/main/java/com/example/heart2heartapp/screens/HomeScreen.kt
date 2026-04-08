@@ -18,9 +18,9 @@ fun HomeScreen(name: String, navController: NavController, onArgumentsButtonClic
             items(eventViewModel.events) { event ->
                 Text(event.name)
                 Button(onClick = {
-                    navController.navigate("user-page/${event.id}")
+                    navController.navigate("event-page/${event.id}")
                 }) {
-                    Text("See user")
+                    Text("Se Event")
                 }
             }
         }
