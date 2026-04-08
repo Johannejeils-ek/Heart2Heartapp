@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                 bottomBar = { BottomNavBar(navController) }) { innerPadding ->
                 NavHost(
                     navController = navController,
-                    startDestination = "home-screen",
+                    startDestination = "heart-screen",
                     modifier = Modifier.padding(innerPadding)
                 ) {
 
@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
                             name = "HeartID", onArgumentsButtonClick = {
                                 val stringToSend = "Clicked from heart"
                                 // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}"){
+                                navController.navigate("sendArgumentsHere/${stringToSend}") {
                                     launchSingleTop = true
                                 }
 
@@ -89,7 +89,7 @@ class MainActivity : ComponentActivity() {
                             name = "ChatID", onArgumentsButtonClick = {
                                 val stringToSend = "Clicked from chat"
                                 // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}"){
+                                navController.navigate("sendArgumentsHere/${stringToSend}") {
                                     launchSingleTop = true
                                 }
 
@@ -137,6 +137,7 @@ class MainActivity : ComponentActivity() {
 fun SendArgumentsHere(name: String) {
     Text(text = "send argument Argument: $name")
 }
+
 @Composable
 fun EventBuilder(id: String) {
     Text(text = "Event builder - Argument: $id")

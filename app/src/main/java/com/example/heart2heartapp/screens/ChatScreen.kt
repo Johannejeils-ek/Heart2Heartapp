@@ -17,7 +17,7 @@ fun ChatScreen(name: String, onArgumentsButtonClick: () -> Unit) {
             text = "Welcome to chat!"
         )
         Button(onClick = onArgumentsButtonClick) {
-            Text("Send argument")
+            Text("Not yet working")
         }
     }
 }
