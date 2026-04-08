@@ -64,17 +64,21 @@ class MainActivity : ComponentActivity() {
                     composable("home-screen") {
                         HomeScreen(
                             name = "HomeID",
-                            navController = navController,
-                            onArgumentsButtonClick = {
-                                composable("event-bubble/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })) { backStackEntry ->
-                                    val id = backStackEntry.arguments?.getInt("id") ?: return@composable
-                                    val foundEvent = eventViewModel.getEvent(id)
-                                    if(foundEvent!= null) {
-                                        Text(text = "Event name: ${foundEvent.name}. Id: ${foundEvent.id}")
-                                    }
-                                }
-
+                            onEventClick = {id -> navController.navigate("event-screen/${id}") {
+                                launchSingleTop = true
+                            }
                             })
+                    }
+                    /*
+                    ======================== ENKELTE EVENT SCREEN ==========================
+                     */
+                    composable("event-screen/{id}", arguments = listOf(navArgument("id") { type = NavType.IntType })
+                    ) { backStackEntry ->
+                        val id = backStackEntry.arguments?.getInt("id") ?: return@composable
+                        val foundEvent = eventViewModel.getEvent(id)
+                        if(foundEvent!= null) {
+                            Text(text = "Event name: ${foundEvent.name}. Id: ${foundEvent.id}")
+                        }
                     }
 
                     composable("heart-screen") {
