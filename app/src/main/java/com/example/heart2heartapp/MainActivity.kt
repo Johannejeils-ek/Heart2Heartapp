@@ -98,15 +98,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     composable("chat-screen") {
-                        ChatScreen(
-                            name = "ChatID", onArgumentsButtonClick = {
-                                val stringToSend = "Clicked from chat"
-                                // this is how the "url" will look: sendArgumentsHere/Benjamin
-                                navController.navigate("sendArgumentsHere/${stringToSend}") {
-                                    launchSingleTop = true
-                                }
-
-                            })
+                        ChatScreen()
                     }
 
                     /*
