@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -105,12 +106,17 @@ fun listOfMessages(fontFamily: FontFamily) {
                     textAlign = TextAlign.Start,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 24.dp)
-                        .padding(horizontal = 24.dp)
+                        .padding(vertical = 10.dp)
+                        .padding(horizontal = 8.dp)
                 )
                 Text(
                     text = message.lastMessage,
+                    modifier = Modifier
+                        .padding(vertical = 10.dp)
+                        .padding(horizontal = 10.dp)
                 )
+
+                Divider()
 
 
             }
