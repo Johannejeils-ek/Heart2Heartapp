@@ -1,4 +1,9 @@
 package com.example.heart2heartapp.classes;
 
-public class Messages {
-}
+data class Message (
+    val name: String,
+    val lastMessage: String,
+    val image: Int
+)
+
+
