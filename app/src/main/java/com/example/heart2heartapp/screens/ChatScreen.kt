@@ -20,10 +20,12 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.heart2heartapp.ui.theme.BricolageFont
 import com.example.heart2heartapp.ui.theme.PoppinsFont
 import com.example.heart2heartapp.R
 import com.example.heart2heartapp.classes.Message
+import com.example.heart2heartapp.classes.MessagesViewModel
 
 @Composable
 fun ChatScreen () {
@@ -50,28 +52,13 @@ fun header (fontFamily: FontFamily){
     )
 }
 
-
 @Composable
 fun listOfMessages(fontFamily: FontFamily) {
 
-    val messages = listOf(
-        Message("Grethe", "You: Vi ses!", R.drawable.andrea),
-        Message("Andrea", "Yes!", R.drawable.andrea),
-        Message("Laura", "Så true!", R.drawable.andrea),
-        Message("Natalie", "You: Det ved jeg ikke", R.drawable.andrea),
-        Message("Solveigh", "Kommer du til saunagus?", R.drawable.andrea),
-        Message("Johanne", "You: What's up guarl?", R.drawable.andrea),
-        Message("Mathilde", "Ej det var vildt sjovt!", R.drawable.andrea),
-        Message("Ida", "You: Elsker bare H2H", R.drawable.andrea),
-        Message("Kathrine", "Ej så du Annika havde hjertet??", R.drawable.andrea),
-        Message("Olivia", "You: Det skal vi gøre igen snart!", R.drawable.andrea),
-        Message("Josephine", "You: Så du de havde keramik?", R.drawable.andrea),
-
-
-        )
+    val messagesViewModel = viewModel<MessagesViewModel>()
 
     LazyColumn {
-        items(messages) { message ->
+        items(messagesViewModel.messages) { message ->
             IndividualChatBox(message)
         }
 
