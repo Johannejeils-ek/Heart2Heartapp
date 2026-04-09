@@ -111,6 +111,7 @@ fun listOfMessages(fontFamily: FontFamily) {
                 )
                 Text(
                     text = message.lastMessage,
+                    fontFamily = PoppinsFont,
                     modifier = Modifier
                         .padding(vertical = 10.dp)
                         .padding(horizontal = 10.dp)
