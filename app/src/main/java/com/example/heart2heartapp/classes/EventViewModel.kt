@@ -1,15 +1,16 @@
 package com.example.heart2heartapp.classes
 
 import androidx.lifecycle.ViewModel
+import com.example.heart2heartapp.R
 
 class EventViewModel: ViewModel() {
 
     val exampleEvents: List<Event> = listOf(
-        Event("Sauna gus med Andreas Bo", 1),
-        Event("Stratego turnering på Bastard Café", 2),
-        Event("Gratis BMO på Lagkagehuset", 3),
-        Event("Lysshow på Bryggen", 4),
-        Event("Foredrag om Leverpostejsbogen af Münster", 5)
+        Event("Sauna gus med Andreas Bo", 1, R.drawable.eventest),
+        Event("Stratego turnering på Bastard Café", 2, R.drawable.eventest),
+        Event("Gratis BMO på Lagkagehuset", 3, R.drawable.eventest),
+        Event("Lysshow på Bryggen", 4, R.drawable.eventest),
+        Event("Foredrag om Leverpostejsbogen af Münster", 5, R.drawable.eventest)
     )
     val events: List<Event> = exampleEvents
 
