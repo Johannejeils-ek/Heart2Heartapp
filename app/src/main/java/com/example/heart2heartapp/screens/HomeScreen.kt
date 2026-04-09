@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.heart2heartapp.classes.Event
 import com.example.heart2heartapp.classes.EventViewModel
 import com.example.heart2heartapp.ui.theme.BricolageFont
 
@@ -62,7 +63,8 @@ fun HomeScreen(name: String,
             events.firstOrNull()?.let { heroEvent ->
                 HeroBanner(
                     title = heroEvent.name,
-                    onClick = { onEventClick(heroEvent.id) }
+                    onClick = { onEventClick(heroEvent.id) },
+                    events = heroEvent
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -103,7 +105,8 @@ fun HomeScreen(name: String,
                 events.take(10).forEach { event ->
                     SmallEventCard(
                         title = event.name,
-                        onClick = { onEventClick(event.id) }
+                        onClick = { onEventClick(event.id) },
+                        events = event
                     )
                 }
             }
@@ -129,7 +132,8 @@ fun HomeScreen(name: String,
                 events.drop(10).forEach { event ->
                     SmallEventCard(
                         title = event.name,
-                        onClick = { onEventClick(event.id) }
+                        onClick = { onEventClick(event.id) },
+                        events = event
                     )
                 }
             }
@@ -140,7 +144,8 @@ fun HomeScreen(name: String,
         items(events.takeLast(2)) { event ->
             FullWidthEventCard(
                 title = event.name,
-                onClick = { onEventClick(event.id) }
+                onClick = { onEventClick(event.id) },
+                events = event
             )
             Spacer(modifier = Modifier.height(14.dp))
         }
@@ -149,7 +154,7 @@ fun HomeScreen(name: String,
 
 // ── Hero Banner ───────────────────────────────────────────────
 @Composable
-fun HeroBanner(title: String, onClick: () -> Unit) {
+fun HeroBanner(title: String, onClick: () -> Unit, events: Event) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -159,7 +164,7 @@ fun HeroBanner(title: String, onClick: () -> Unit) {
             .clickable { onClick() }
     ) {
         Image(
-            painter = painterResource(R.drawable.placeholder),
+            painter = painterResource(events.image),
             contentDescription = title,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -190,7 +195,7 @@ fun HeroBanner(title: String, onClick: () -> Unit) {
 
 // ── Small Event Card ──────────────────────────────────────────
 @Composable
-fun SmallEventCard(title: String, onClick: () -> Unit) {
+fun SmallEventCard(title: String, onClick: () -> Unit, events: Event) {
     Box(
         modifier = Modifier
             .size(140.dp)
@@ -198,7 +203,7 @@ fun SmallEventCard(title: String, onClick: () -> Unit) {
             .clickable { onClick() }
     ) {
         Image(
-            painter = painterResource(R.drawable.placeholder),
+            painter = painterResource(events.image),
             contentDescription = title,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -226,7 +231,7 @@ fun SmallEventCard(title: String, onClick: () -> Unit) {
 
 // ── Full Width Event Card ─────────────────────────────────────
 @Composable
-fun FullWidthEventCard(title: String, onClick: () -> Unit) {
+fun FullWidthEventCard(title: String, onClick: () -> Unit, events: Event) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -236,7 +241,7 @@ fun FullWidthEventCard(title: String, onClick: () -> Unit) {
             .clickable { onClick() }
     ) {
         Image(
-            painter = painterResource(R.drawable.placeholder),
+            painter = painterResource(events.image),
             contentDescription = title,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
