@@ -38,11 +38,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.heart2heartapp.classes.Event
-import com.example.heart2heartapp.classes.EventViewModel
+import com.example.heart2heartapp.classes.viewModel.EventViewModel
+import com.example.heart2heartapp.components.FullWidthEventCard
+import com.example.heart2heartapp.components.HeartCategoryButton
+import com.example.heart2heartapp.components.HeroBanner
+import com.example.heart2heartapp.components.SmallEventCard
 import com.example.heart2heartapp.ui.theme.BricolageFont
 
 @Composable
-fun HomeScreen(name: String,
+fun HomeScreen(
+    name: String,
     onEventClick: (Int) -> Unit
 ) {
 
@@ -57,7 +62,6 @@ fun HomeScreen(name: String,
         contentPadding = PaddingValues(bottom = 16.dp)
     ) {
 
-
         // ── Hero Banner (first event) ──────────────────────────
         item {
             events.firstOrNull()?.let { heroEvent ->
@@ -69,7 +73,6 @@ fun HomeScreen(name: String,
             }
             Spacer(modifier = Modifier.height(20.dp))
         }
-
 
         // ── Category Hearts ────────────────────────────────────
         item {
@@ -149,175 +152,5 @@ fun HomeScreen(name: String,
             )
             Spacer(modifier = Modifier.height(14.dp))
         }
-    }
-}
-
-// ── Hero Banner ───────────────────────────────────────────────
-@Composable
-fun HeroBanner(title: String, onClick: () -> Unit, events: Event) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 16.dp)
-            .height(220.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .clickable { onClick() }
-    ) {
-        Image(
-            painter = painterResource(events.image),
-            contentDescription = title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0x99000000))
-                    )
-                )
-        )
-        Text(
-            text = title,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontFamily = BricolageFont,
-            fontSize = 13.sp,
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(14.dp)
-                .background(Color(0x80BFC1C2), RoundedCornerShape(20.dp))
-                .padding(horizontal = 12.dp, vertical = 6.dp)
-        )
-    }
-}
-
-// ── Small Event Card ──────────────────────────────────────────
-@Composable
-fun SmallEventCard(title: String, onClick: () -> Unit, events: Event) {
-    Box(
-        modifier = Modifier
-            .size(140.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .clickable { onClick() }
-    ) {
-        Image(
-            painter = painterResource(events.image),
-            contentDescription = title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0xAA000000))
-                    )
-                )
-        )
-        Text(
-            text = title,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 13.sp,
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(10.dp)
-        )
-    }
-}
-
-// ── Full Width Event Card ─────────────────────────────────────
-@Composable
-fun FullWidthEventCard(title: String, onClick: () -> Unit, events: Event) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp)
-            .height(200.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .clickable { onClick() }
-    ) {
-        Image(
-            painter = painterResource(events.image),
-            contentDescription = title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    Brush.verticalGradient(
-                        listOf(Color.Transparent, Color(0xAA000000))
-                    )
-                )
-        )
-        Text(
-            text = title,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(14.dp)
-                .background(Color(0x99000000), RoundedCornerShape(20.dp))
-                .padding(horizontal = 12.dp, vertical = 6.dp)
-        )
-    }
-}
-
-// ── Heart Category Button ─────────────────────────────────────
-@Composable
-fun HeartCategoryButton(label: String) {
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.size(width = 86.dp, height = 80.dp)
-    ) {
-        Canvas(modifier = Modifier.fillMaxSize()) {
-            val w = size.width
-            val h = size.height
-            val path = Path().apply {
-                moveTo(w / 2f, h * 0.85f)
-                // venstre side
-                cubicTo(
-                    w * 0.10f, h * 0.65f,
-                    w * 0.00f, h * 0.35f,
-                    w * 0.25f, h * 0.20f
-                )
-
-                // venstre bule (top)
-                cubicTo(
-                    w * 0.40f, h * 0.15f,
-                    w * 0.50f, h * 0.25f,
-                    w / 2f, h * 0.28f
-                )
-
-                // højre bule (spejlet)
-
-                cubicTo(
-                    w * 0.50f, h * 0.20f,
-                    w * 0.60f, h * 0.15f,
-                    w * 0.75f, h * 0.20f
-                )
-
-                // højre side ned
-                cubicTo(
-                    w * 1.00f, h * 0.35f,
-                    w * 0.90f, h * 0.65f,
-                    w / 2f, h * 0.85f
-                )
-            }
-            drawPath(path, Color(0xFFFF77B7))
-        }
-        Text(
-            text = label,
-            color = Color.White,
-            fontWeight = FontWeight.Bold,
-            fontSize = 14.sp,
-            modifier = Modifier.offset(y = 4.dp)
-        )
     }
 }

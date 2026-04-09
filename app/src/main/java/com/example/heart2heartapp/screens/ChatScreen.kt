@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,21 +22,20 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.heart2heartapp.ui.theme.BricolageFont
 import com.example.heart2heartapp.ui.theme.PoppinsFont
-import com.example.heart2heartapp.R
 import com.example.heart2heartapp.classes.Message
-import com.example.heart2heartapp.classes.MessagesViewModel
+import com.example.heart2heartapp.classes.viewModel.MessagesViewModel
 
 @Composable
 fun ChatScreen () {
     Column (modifier = Modifier
         .background(Color(0xFFFFFFFF))){
-        header(BricolageFont)
-        listOfMessages(PoppinsFont)
+        Header(BricolageFont)
+        ListOfMessages(PoppinsFont)
     }
 }
 
 @Composable
-fun header (fontFamily: FontFamily){
+fun Header (fontFamily: FontFamily){
     Text(
         "Beskeder",
         color = Color(0xFFFF77B7),
@@ -48,44 +46,37 @@ fun header (fontFamily: FontFamily){
             .fillMaxWidth()
             .padding(vertical = 40.dp)
             .padding(horizontal = 20.dp)
-
     )
 }
 
 @Composable
-fun listOfMessages(fontFamily: FontFamily) {
-
+fun ListOfMessages(fontFamily: FontFamily) {
     val messagesViewModel = viewModel<MessagesViewModel>()
 
     LazyColumn {
         items(messagesViewModel.messages) { message ->
             IndividualChatBox(message)
         }
-
     }
 }
 
     @Composable
     fun IndividualChatBox(message: Message) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-
             Image(
                 painter = painterResource(message.image),
                 contentDescription = "ProfilePic",
                 modifier = Modifier
                     .size(100.dp)
             )
-
             Column(
                 modifier = Modifier
                     .padding(start = 30.dp)
             ) {
-
                 Text(
                     text = message.name,
                     fontSize = 30.sp,
@@ -103,10 +94,7 @@ fun listOfMessages(fontFamily: FontFamily) {
                         .padding(vertical = 10.dp)
                         .padding(horizontal = 10.dp)
                 )
-
                 Divider()
-
-
             }
         }
     }

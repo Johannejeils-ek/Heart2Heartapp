@@ -1,9 +1,10 @@
-package com.example.heart2heartapp.classes
+package com.example.heart2heartapp.classes.viewModel
 
 import androidx.lifecycle.ViewModel
 import com.example.heart2heartapp.R
+import com.example.heart2heartapp.classes.Event
 
-class EventViewModel: ViewModel() {
+class EventViewModel : ViewModel() {
 
     val exampleEvents: List<Event> = listOf(
         Event("Sauna gus med Andreas Bo", 1, R.drawable.saunagus),
@@ -21,7 +22,6 @@ class EventViewModel: ViewModel() {
         Event("Keramik workshop på Creative space ", 13, R.drawable.creativespace),
         Event("Ølsmagning på Nørrebro Bryghus", 14, R.drawable.beer),
         Event("Yoga på taget af Illum", 15, R.drawable.yoga)
-
     )
     val events: List<Event> = exampleEvents
 
@@ -29,6 +29,4 @@ class EventViewModel: ViewModel() {
 
         return events.find { event -> event.id == id }
     }
-
-
 }
