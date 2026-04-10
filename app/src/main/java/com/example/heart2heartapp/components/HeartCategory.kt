@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.heart2heartapp.ui.theme.PoppinsFont
 
 @Composable
 fun HeartCategoryButton(label: String) {
@@ -61,6 +62,7 @@ fun HeartCategoryButton(label: String) {
             text = label,
             color = Color.White,
             fontWeight = FontWeight.Bold,
+            fontFamily = PoppinsFont,
             fontSize = 14.sp,
             modifier = Modifier.offset(y = 4.dp)
         )
