@@ -33,6 +33,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,6 +45,7 @@ import com.example.heart2heartapp.components.HeartCategoryButton
 import com.example.heart2heartapp.components.HeroBanner
 import com.example.heart2heartapp.components.SmallEventCard
 import com.example.heart2heartapp.ui.theme.BricolageFont
+import com.example.heart2heartapp.ui.theme.PoppinsFont
 
 @Composable
 fun HomeScreen(
@@ -96,6 +98,7 @@ fun HomeScreen(
                 text = "Udforsk events",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = PoppinsFont,
                 color = Color(0xFF1A1A1A),
                 modifier = Modifier.padding(start = 16.dp, bottom = 12.dp)
             )
@@ -123,6 +126,7 @@ fun HomeScreen(
                 text = "Events udvalgt til dig",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
+                fontFamily = PoppinsFont,
                 color = Color(0xFF1A1A1A),
                 modifier = Modifier.padding(start = 16.dp, bottom = 12.dp)
             )
